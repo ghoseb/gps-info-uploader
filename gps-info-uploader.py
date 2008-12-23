@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ## gps-info-uploader.py -- Upload GPS Info -*- Python -*-
-## Time-stamp: "2008-12-23 20:40:23 ghoseb"
+## Time-stamp: "2008-12-23 21:08:40 ghoseb"
 
 ## Copyright (c) 2008, Baishampayan Ghose <b.ghose at gmail.com>
 """
@@ -24,14 +24,14 @@ positioning.set_requestors([{"type":"service",
 
 positioning.last_position()
 
-def callback_fn(event):
+def callback_fn(e):
     """Callback to log GPS info
     
     Arguments:
     - `event`: The info from a GPS event
     """
     fp = open(LOG_FILE, "a")
-    fp.write(str(event) + "\n")
+    fp.write("%s,%s,%s\n" % (e['position']['latitude'], e['position']['longitude'], e['position']['horizontal_accuracy']))
     fp.close()
     print "Wrote gps info!"
     
